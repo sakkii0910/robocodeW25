@@ -28,7 +28,7 @@ import java.util.Calendar;
  * @author Flemming N. Larsen (original)
  */
 class BattleRecorder {
-	private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmmss");
 
 	private final RecordManager recordmanager;
 	private final ISettingsManager properties;
