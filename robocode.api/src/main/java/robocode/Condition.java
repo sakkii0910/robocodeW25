@@ -50,7 +50,7 @@ public abstract class Condition {
 	/**
 	 * Creates a new, unnamed Condition with the default priority, which is 80.
 	 */
-	protected Condition() {}
+	public Condition() {}
 
 	/**
 	 * Creates a new Condition with the specified name, and default priority,
@@ -58,7 +58,7 @@ public abstract class Condition {
 	 *
 	 * @param name the name for the new Condition
 	 */
-	protected Condition(String name) {
+	public Condition(String name) {
 		this.name = name;
 	}
 
