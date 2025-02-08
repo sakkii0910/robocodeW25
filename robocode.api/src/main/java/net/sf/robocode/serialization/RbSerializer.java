@@ -7,7 +7,6 @@
  */
 package net.sf.robocode.serialization;
 
-
 import net.sf.robocode.core.ContainerBase;
 import net.sf.robocode.io.Logger;
 import net.sf.robocode.manager.IVersionManagerBase;
@@ -22,7 +21,6 @@ import java.nio.CharBuffer;
 import java.nio.charset.*;
 import java.util.HashMap;
 import java.util.Map;
-
 
 /**
  * @author Pavel Savara (original)
@@ -117,7 +115,7 @@ public final class RbSerializer {
 		buffer = ByteBuffer.allocate(length);
 		serialize(buffer, type, object);
 		if (buffer.remaining() != 0) {
-			throw new IOException("Serialization failed: bad size"); 
+			throw new IOException("Serialization failed: bad size");
 		}
 		target.write(buffer.array());
 	}
@@ -226,7 +224,7 @@ public final class RbSerializer {
 			buffer.put(TERMINATOR_TYPE);
 		}
 		// FOR-DEBUG if (expect != buffer.position()) {
-		// FOR-DEBUG 	throw new Error("Bad size");
+		// FOR-DEBUG throw new Error("Bad size");
 		// FOR-DEBUG }
 	}
 
@@ -405,9 +403,10 @@ public final class RbSerializer {
 
 	public double[] deserializeDoubles(ByteBuffer buffer) {
 		final int len = buffer.getInt();
+		double[] emptyArr = {};
 
 		if (len == -1) {
-			return null;
+			return emptyArr;
 		}
 		double[] res = new double[len];
 
@@ -514,7 +513,7 @@ public final class RbSerializer {
 		return rbs.serialize(type, src);
 	}
 
-	@SuppressWarnings({ "unchecked"})
+	@SuppressWarnings({ "unchecked" })
 	public static <T> T deserializeFromBuffer(ByteBuffer buffer) throws IOException {
 		RbSerializer rbs = new RbSerializer();
 		final Object res = rbs.deserialize(buffer);
