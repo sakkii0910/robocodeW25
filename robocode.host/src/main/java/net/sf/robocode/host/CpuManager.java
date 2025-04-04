@@ -65,6 +65,7 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 		long start = System.currentTimeMillis();
 
 		while (System.currentTimeMillis() - start < TEST_PERIOD_MILLIS) {
+			// Replaced Math.random() with ThreadLocalRandom as recommended
 			double rand1 = ThreadLocalRandom.current().nextDouble();
 			double rand2 = ThreadLocalRandom.current().nextDouble();
 			double rand3 = ThreadLocalRandom.current().nextDouble();
@@ -77,14 +78,12 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 			count++;
 		}
 
-		// to cheat optimizer, almost never happen
 		if (d == 0.0) {
 			Logger.logMessage("bingo!");
 		}
 
 		cpuConstant = Math.max(1, (long) (1000000.0 * APPROXIMATE_CYCLES_ALLOWED * TEST_PERIOD_MILLIS / count));
 	}
-
 
 	private void setStatus(String message) {
 		IWindowManager windowManager = Container.getComponent(IWindowManager.class);
