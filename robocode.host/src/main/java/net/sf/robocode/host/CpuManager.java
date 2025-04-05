@@ -63,18 +63,13 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 		long count = 0;
 		double d = 0;
 		long start = System.currentTimeMillis();
+		ThreadLocalRandom random = ThreadLocalRandom.current(); // Single instance
 
 		while (System.currentTimeMillis() - start < TEST_PERIOD_MILLIS) {
-			// Replaced Math.random() with ThreadLocalRandom as recommended
-			double rand1 = ThreadLocalRandom.current().nextDouble();
-			double rand2 = ThreadLocalRandom.current().nextDouble();
-			double rand3 = ThreadLocalRandom.current().nextDouble();
-
 			d += Math.hypot(
-					Math.sqrt(Math.abs(log(Math.atan(rand1)))),
-					Math.cbrt(Math.abs(rand2 * 10))
-			) / exp(rand3);
-
+					Math.sqrt(Math.abs(log(Math.atan(random.nextDouble())))),
+					Math.cbrt(Math.abs(random.nextDouble() * 10))
+			) / exp(random.nextDouble());
 			count++;
 		}
 
