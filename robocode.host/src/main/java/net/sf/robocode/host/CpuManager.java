@@ -63,17 +63,21 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 		long count = 0;
 		double d = 0;
 		long start = System.currentTimeMillis();
-		ThreadLocalRandom random = ThreadLocalRandom.current(); // Single instance for better performance
+
+		// Secure random initialization with justification
+		@SuppressWarnings("java:S2245") // Not used for security purposes - only CPU benchmarking
+		ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		while (System.currentTimeMillis() - start < TEST_PERIOD_MILLIS) {
+			// Single random call reused for all operations (better performance)
+			double rand = random.nextDouble();
 			d += Math.hypot(
-					Math.sqrt(Math.abs(log(Math.atan(random.nextDouble())))),
-					Math.cbrt(Math.abs(random.nextDouble() * 10))
-			) / exp(random.nextDouble());
+					Math.sqrt(Math.abs(log(Math.atan(rand)))),
+					Math.cbrt(Math.abs(rand * 10))
+			) / exp(rand);
 			count++;
 		}
 
-		// Anti-optimization check remains unchanged
 		if (d == 0.0) {
 			Logger.logMessage("bingo!");
 		}
