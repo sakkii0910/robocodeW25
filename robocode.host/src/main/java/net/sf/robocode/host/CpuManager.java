@@ -63,7 +63,7 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 		long count = 0;
 		double d = 0;
 		long start = System.currentTimeMillis();
-		ThreadLocalRandom random = ThreadLocalRandom.current(); // Single instance
+		ThreadLocalRandom random = ThreadLocalRandom.current(); // Single instance for better performance
 
 		while (System.currentTimeMillis() - start < TEST_PERIOD_MILLIS) {
 			d += Math.hypot(
@@ -73,6 +73,7 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 			count++;
 		}
 
+		// Anti-optimization check remains unchanged
 		if (d == 0.0) {
 			Logger.logMessage("bingo!");
 		}
