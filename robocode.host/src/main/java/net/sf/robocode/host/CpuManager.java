@@ -65,7 +65,7 @@ public class CpuManager implements ICpuManager { // NO_UCD (use default)
 		long start = System.currentTimeMillis();
 
 		// Secure random initialization with justification
-		@SuppressWarnings("java:S2245") // Not used for security purposes - only CPU benchmarking
+		@SuppressWarnings("java:S2245")
 		ThreadLocalRandom random = ThreadLocalRandom.current();
 
 		while (System.currentTimeMillis() - start < TEST_PERIOD_MILLIS) {
